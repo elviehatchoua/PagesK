@@ -188,8 +188,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               onTap: () {
                                 if (index == 0 ||
                                     index == 1 ||
-                                    index == 2 ||
-                                    index == 3) MenuItemSelected(index);
+                                    index == 2 ) MenuItemSelected(index);
                                 setState(() {
                                   if (menuItemList[index].title == "Home") {
                                     currentIndex = 0;
@@ -203,14 +202,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                       ZoomDrawer.of(context)!.toggle();
                                     });
                                   } else if (menuItemList[index].title ==
-                                      "Budgets") {
-                                    currentIndex = 2;
-                                    setState(() {
-                                      ZoomDrawer.of(context)!.toggle();
-                                    });
-                                  } else if (menuItemList[index].title ==
                                       "Wallet") {
-                                    currentIndex = 3;
+                                    currentIndex = 2;
                                     setState(() {
                                       ZoomDrawer.of(context)!.toggle();
                                     });
