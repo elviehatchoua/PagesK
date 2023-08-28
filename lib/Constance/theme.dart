@@ -21,7 +21,7 @@ class AppTheme {
       subtitle1: GoogleFonts.roboto(textStyle: TextStyle(color: base.subtitle1!.color, fontSize: 15)),
       subtitle2: GoogleFonts.roboto(textStyle: TextStyle(color: base.caption!.color, fontSize: 15, fontWeight: FontWeight.w500)),
       bodyText1: GoogleFonts.roboto(textStyle: TextStyle(color: base.bodyText1!.color, fontSize: 14)),
-      bodyText2: GoogleFonts.roboto(textStyle: TextStyle(color: base.bodyText2!.color, fontSize: 16)),
+      bodyText2: GoogleFonts.roboto(textStyle: TextStyle(color: base.bodyText2!.color, fontSize: 16, fontWeight: FontWeight.bold)),
       button: GoogleFonts.roboto(textStyle: TextStyle(color: base.button!.color, fontSize: 14, fontWeight: FontWeight.w500)),
       //Normale TextStyle headline1
       headline1: GoogleFonts.roboto(textStyle: TextStyle(color: base.subtitle1!.color, fontSize: 15, fontWeight: FontWeight.w500)),

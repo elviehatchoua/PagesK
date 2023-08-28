@@ -3,31 +3,29 @@
 //import 'dart:developer';
 import 'package:animations/animations.dart';
 import 'package:finology/Constance/theme.dart';
-//import 'package:finology/Home/Accounts/account.dart';
-import 'package:finology/Home/Monthly_Budgets/monthly_budgets.dart';
-import 'package:finology/Home/Wallet/wallet.dart';
-import 'package:finology/Home/transactions_screen.dart';
 import 'package:finology/HomePage/Pret/pret.dart';
 import 'package:finology/HomePage/Transfert/transfert.dart';
-import 'package:finology/Models/myfiles.dart';
+
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:finology/Constance/constance.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'dart:math' as math;
+
+import '../Home/Accounts/account.dart';
 import '../Home/Dashbord/dashbord_tab.dart';
+import '../Home/Wallet/wallet.dart';
 import '../HomePage/Troc/troc.dart';
-import 'circular_menu.dart';
-import 'common_button.dart';
-import 'drawer_widget.dart';
+
 
 bool status = AppTheme.isLightTheme ? false : true;
 int currentIndex = 0;
 List<Widget> currentPage = [
+  Home(),
+  //AccountScreen(),
   Troc(),
-  Transfert(),
-  Pret(),
+  AccountScreen(),
+  //WalletScreen(),
+
 ];
 
 class CostomeBottomBar extends StatefulWidget {
@@ -83,7 +81,7 @@ class _CostomeBottomBarState extends State<CostomeBottomBar> {
                   InkWell(
                     onTap: () => setState(() => currentIndex = 0),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 9,
                       height: double.infinity,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +153,7 @@ class _CostomeBottomBarState extends State<CostomeBottomBar> {
                   InkWell(
                     onTap: () => setState(() => currentIndex = 2),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 9,
                       height: double.infinity,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
