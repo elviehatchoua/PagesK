@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final String? text;
   final Color? containerColor;
   final IconData? icon;
+  final double SizeIcon;
   final String? image;
   final VoidCallback onPressed;
   bool? disableButton;
@@ -17,9 +18,10 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final TextStyle? style;
   bool? miniRadius;
-  CustomButton(
+  CustomButton( 
       {Key? key,
       this.text,
+      this.SizeIcon=24,
       this.containerColor,
       this.icon,
       this.image,
@@ -51,7 +53,7 @@ class CustomButton extends StatelessWidget {
             icon != null && icon != ""
                 ? Row(
                     children: [
-                      Icon(icon, color: Colors.white, size: 24),
+                      Icon(icon, color: Colors.white, size: SizeIcon),
                       SizedBox(width: 5)
                     ],
                   )

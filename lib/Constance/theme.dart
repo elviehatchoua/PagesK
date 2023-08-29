@@ -31,7 +31,7 @@ class AppTheme {
       headline2: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline2!.color, fontSize: 60)),
       headline5: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline5!.color, fontSize: 20.5, fontWeight: FontWeight.w700)),
       headline6: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline6!.color, fontSize: 20, fontWeight: FontWeight.w500)),
-      overline: GoogleFonts.roboto(textStyle: TextStyle(color: base.overline!.color, fontSize: 10)),
+      overline: GoogleFonts.roboto(textStyle: TextStyle(color: base.overline!.color, fontSize: 2)),
     );
   }
 
