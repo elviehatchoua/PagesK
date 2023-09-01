@@ -30,7 +30,7 @@ class AppTheme {
       headline3: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline3!.color, fontSize: 40, fontWeight: FontWeight.w600)),
       headline2: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline2!.color, fontSize: 60)),
       headline5: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline5!.color, fontSize: 20.5, fontWeight: FontWeight.w700)),
-      headline6: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline6!.color, fontSize: 20, fontWeight: FontWeight.w500)),
+      headline6: GoogleFonts.roboto(textStyle: TextStyle(color: base.headline6!.color, fontSize: 20, fontWeight: FontWeight.w400)),
       overline: GoogleFonts.roboto(textStyle: TextStyle(color: base.overline!.color, fontSize: 2)),
     );
   }
@@ -45,7 +45,7 @@ class AppTheme {
 
     final ThemeData base = ThemeData.light();
     return base.copyWith(
-      appBarTheme: AppBarTheme(color: Colors.white),
+      appBarTheme: AppBarTheme(color: Colors.white, iconTheme: IconThemeData(color:Color(0xff2b2b2b) )),
       popupMenuTheme: PopupMenuThemeData(color: Colors.white),
       iconTheme: IconThemeData(color: Color(0xff2b2b2b)),
       colorScheme: colorScheme,

@@ -1,32 +1,23 @@
-import 'package:flutter/material.dart';
+import 'dart:core';
 
-import '../Constance/constance.dart';
+class TrocModel {
+ 
+  String  userName;
+  String  objetARecevoir;
+  String  commentaire;
+  double valeurNet;
+    var   imagePath;
+    bool  isSwitched;
 
-
-class Troc {
-  String ? detailTroc;
-  String ? imageTroc;
-  String ? userName;
-
-  Troc(
-    {this.detailTroc, this.imageTroc, this.userName}
+  TrocModel({
+    required this.objetARecevoir,
+    required this.valeurNet,
+    this.imagePath,
+    required this.isSwitched,
+    required this.commentaire, 
+    required this.userName
+  }
   );
 }
 
-List TrocList = [
-  Troc(
-    detailTroc: 'Bonjour ici, j\'ai une chaussure addidas à vendre, bon prix.',
-    imageTroc: ConstanceData.adiddas,
-    userName: "Andrea"
-  ),
-   Troc(
-    detailTroc: 'Je veux une machine en echange',
-    imageTroc: ConstanceData.bankLogo,
-    userName: "Elvie"
-  ),
-   Troc(
-    detailTroc: 'Soir soir qui veut mon téléphone?',
-    imageTroc: ConstanceData.phone,
-    userName: "Michelle"
-  ),
-];
+ 
