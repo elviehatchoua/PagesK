@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen>
             Image.asset(ConstanceData.claylogo, height: 60),
             SizedBox(height: defaultPadding),
             Text(
-              "Finology",
+              "KABAK",
               style: Theme.of(context)
                   .textTheme
                   .headline3!

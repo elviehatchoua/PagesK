@@ -68,7 +68,7 @@ class ConstanceData {
 
   ////////////////////////////////////////////
   static String bseIconUrl = 'assets/icons/';
-  static String claylogo = bseIconUrl + "clay-logo.png";
+  static String claylogo = bseIconUrl + "Kabak_logo.jpg";
   static String googleIcon = bseIconUrl + "google_icon.png";
   static String facebookFIcon = bseIconUrl + "facebook_f_icon.png";
   static String appleIcon = bseIconUrl + "apple_icon.png";
