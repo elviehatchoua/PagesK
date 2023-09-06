@@ -57,6 +57,11 @@ class _TrocCreatingHeadState extends State<TrocCreatingHead> {
                           child: InkWell(
                             onTap: () {
                               showBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(50)
+                                  )
+                                ),
                                 context: context, 
                                 builder: ((builder) =>  MyBottomSheet(photoFile))
                               );

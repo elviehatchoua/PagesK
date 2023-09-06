@@ -89,7 +89,7 @@ class _TrocItemState extends State<TrocItem> {
                         /* Image.asset( imageTroc
                           ,fit: BoxFit.cover
                         ), *///Image.asset(ConstanceData.adiddas,
-                                         ),
+                      ),
                      ),
                      const SizedBox(height: 10,),
                     Padding(

@@ -24,7 +24,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
     @override
   Widget build (BuildContext context) { 
     return Container(
-      height: 100.0,
+      height: 300.0,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
