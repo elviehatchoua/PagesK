@@ -5,25 +5,26 @@ import 'package:image_picker/image_picker.dart';
 import 'package:finology/screen/Widgets/bottom_sheet.dart';
 
 class TrocCreatingHead extends StatefulWidget {
-  final Function _takeImagePath;
-  const TrocCreatingHead(this._takeImagePath,{super.key});
+  //final Function _takeImagePath;
+  var imageFileHead;
+  bool  isReceive = false;
+  TrocCreatingHead(this.imageFileHead,this.isReceive,{super.key});
 
   @override
   State<TrocCreatingHead> createState() => _TrocCreatingHeadState();
 }
 
 class _TrocCreatingHeadState extends State<TrocCreatingHead> {
-  var imageFileHead;
 
 
  void photoFile (XFile imagePicked) {
    print(' --------------------image picked: $imagePicked');
     setState(() {
-      imageFileHead = imagePicked;
-      widget._takeImagePath(imageFileHead);
+        widget.imageFileHead = imagePicked;
+      //widget._takeImagePath(imageFileHead);
       
     });
-   print(' --------------------image picked: $imageFileHead');
+  // print(' --------------------image file Head*************: $imageFileHead');
 
   
  }
@@ -34,7 +35,7 @@ class _TrocCreatingHeadState extends State<TrocCreatingHead> {
                   clipBehavior: Clip.none, // les elements se cachent ou non
                   alignment: Alignment.center,
                   children: <Widget>[
-                    imageFileHead == null 
+                      widget.imageFileHead == null 
                     ?
                       Container(
                           height: 150,
@@ -45,15 +46,19 @@ class _TrocCreatingHeadState extends State<TrocCreatingHead> {
                     SizedBox(
                       width: double.infinity,
                       height: 250,
-                      child: Image.file( File(imageFileHead.path) , fit: BoxFit.cover),
+                      child: widget.isReceive 
+                      ?
+                       Image.asset( widget.imageFileHead,fit: BoxFit.cover)
+                      :
+                       Image.file( File(  widget.imageFileHead.path) , fit: BoxFit.cover),
 
                     ),
                     Positioned(
-                        top: imageFileHead == null ? 120 : 230,
+                        top:   widget.imageFileHead == null ? 120 : 230,
                         right:20,
                         child: CircleAvatar(
                           radius: 23,
-                          backgroundColor:  imageFileHead == null ? Colors.blue : Colors.grey,
+                          backgroundColor:    widget.imageFileHead == null ? Colors.blue : Colors.grey,
                           child: InkWell(
                             onTap: () {
                               showBottomSheet(

@@ -2,6 +2,7 @@ import 'package:finology/core/Models/troc_model.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/Widgets/user_input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:finology/Constance/constance.dart';
@@ -52,10 +53,10 @@ class _TrocCreationState extends State<TrocCreation> {
       
     });
   }
-
-  void didChangeDependencies() {
+  @override
+  void initState() {
     if(widget.isEdit==true){
-      final trocDetail = Provider.of<TrocProvider>(context,listen: false)
+      TrocModel trocDetail = Provider.of<TrocProvider>(context,listen: false)
           .trocList.firstWhere((troc) => troc.id == widget.trocId );
         setState(() {
           valeurNetController = 
@@ -80,7 +81,7 @@ class _TrocCreationState extends State<TrocCreation> {
         }
        );
     }
-    super.didChangeDependencies();
+    super.initState();
     
   }
 
@@ -91,6 +92,7 @@ class _TrocCreationState extends State<TrocCreation> {
     }
 
     _formKey.currentState!.save();
+
     final enterredValeurNet = double.parse(
         valeurNetController.text
     ),
@@ -102,14 +104,23 @@ class _TrocCreationState extends State<TrocCreation> {
       descriptionTroc: descriptionController.text, 
       userName: "1", 
       categorie: categorieController.text,
-      id: "0"
-    );
+      id: widget.isEdit! == true ? widget.trocId : "0",
 
+    );
+    if(widget.isEdit==true)
+    {
+      Provider.of<TrocProvider>(context,listen:false)
+        .editTroc(newTroc);
+      //Navigator.of(context).pop();
+    }
+    else
+    {
     Provider.of<TrocProvider>(context, listen: false)
       .addNewTroc(newTroc);
-    Navigator.of(context).pop();
-    
+     // Navigator.of(context).pop();
 
+    }
+    Navigator.of(context).pop();
   }
 
   @override
@@ -139,7 +150,8 @@ class _TrocCreationState extends State<TrocCreation> {
         child: Column(
         
           children: [
-                  TrocCreatingHead(takeImagePath),
+                  TrocCreatingHead(imagePath,
+                   widget.isEdit== true? true : false),
                   const SizedBox(height: 30,),
                    Container(
                     margin: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),

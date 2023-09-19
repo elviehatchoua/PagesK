@@ -11,6 +11,7 @@ import 'Constance/theme.dart';
 import 'providers/troc_provider.dart';
 import 'screen/Home/Drawer/drawer.dart';
 import 'screen/Home/Dashbord/dashbord_tab.dart';
+import 'screen/HomePage/Troc/troc.dart';
 import 'screen/Startup/enter_mobile_number.dart';
 import 'screen/Startup/enter_otp.dart';
 import 'screen/Startup/introduction.dart';
@@ -103,6 +104,7 @@ class _MyAppState extends State<MyApp> {
     Routes.costomeBottomBar: (BuildContext context) => OpenDrawer(),
     Routes.home: (BuildContext context) => Home(),
     Routes.detailtrop : (BuildContext context) => DetailTrop(),
+    Routes.TROC : (BuildContext context) => Troc(),
   };
 }
 
@@ -117,6 +119,7 @@ class Routes {
   static String costomeBottomBar = "/Home/costome_bottombar";
   static String home = "/Home/home";
   static String detailtrop =  "/detailtrop";
+  static String TROC = "/HomePage/Troc";
 }
 
 class NavKey {

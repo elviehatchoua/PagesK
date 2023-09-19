@@ -3,13 +3,10 @@ import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
 import 'package:provider/provider.dart';
 import '../../../Constance/helpers.dart';
-import '../../../core/Models/troc_model.dart';
-//import 'package:finology/Widgets/widgets.dart';
+
 import 'package:finology/screen/Widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '/Constance/constance.dart';
-
-//import 'package:finology/Widgets/widgets.dart';
 
 class Troc extends StatefulWidget {
   const Troc({Key? key}) : super(key: key);
@@ -20,49 +17,7 @@ class Troc extends StatefulWidget {
 
 class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
 
-/* 
-  final List<TrocModel> TrocList = [
-  TrocModel(
-    commentaire: 'Bonjour ici, j\'ai une chaussure addidas à vendre, bon prix.',
-    imagePath: ConstanceData.adiddas,
-    userName: "Andrea", 
-    valeurNet: 4.500, 
-    isSwitched: false,
-    objetARecevoir: 'un bijoux'
 
-  ),
-   TrocModel(
-    commentaire: 'Je veux une machine en echange',
-    imagePath: ConstanceData.bankLogo,
-    userName: "Elvie",
-    valeurNet: 5500000, 
-    isSwitched: true,
-    objetARecevoir: 'une machine core I3'
-  ),
-   TrocModel(
-    commentaire: 'Soir soir qui veut mon téléphone?',
-    imagePath: ConstanceData.phone,
-    userName: "Michelle",
-    valeurNet: 10.500, 
-    isSwitched: false, 
-    objetARecevoir: 'un sac'
-  ),
-]; 
-  */
-  /* void addTroc(double TxenterredvaleurNet,String TxenterredObjetARecevoir,String TxenterredCommentaire,var TximagePath,bool TxisSwitched)
-  {
-    final newTx = TrocModel(
-        commentaire: TxenterredCommentaire,
-        imagePath: TximagePath,
-        objetARecevoir: TxenterredObjetARecevoir,
-        userName: "1", 
-        valeurNet: TxenterredvaleurNet, 
-        isSwitched: TxisSwitched
-    );
-    setState(() {
-      TrocList.insert(0,newTx);
-    });
-  } */
   @override
   Widget build(BuildContext context) {
     final trocList = Provider.of<TrocProvider>(context, listen:true).trocList;

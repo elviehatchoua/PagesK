@@ -8,6 +8,7 @@ class TrocProvider with ChangeNotifier{
 
   final List<TrocModel> _trocList = [
     TrocModel(
+      id: "1",
     descriptionTroc: 'Bonjour ici, j\'ai une chaussure addidas à vendre, bon prix.',
     imagePath: ConstanceData.adiddas,
     userName: "Andrea", 
@@ -18,6 +19,7 @@ class TrocProvider with ChangeNotifier{
 
   ),
    TrocModel(
+      id: "2",
     descriptionTroc: 'Je veux une machine en echange',
     imagePath: ConstanceData.bankLogo,
     userName: "Elvie",
@@ -28,6 +30,7 @@ class TrocProvider with ChangeNotifier{
 
   ),
    TrocModel(
+      id: "3",
     descriptionTroc: 'Soir soir qui veut mon téléphone?',
     imagePath: ConstanceData.phone,
     userName: "Michelle",
@@ -57,8 +60,15 @@ class TrocProvider with ChangeNotifier{
     notifyListeners();
   }
 //delete
-    void deleteTroc(int id){
+    void deleteTroc(String ? id){
       _trocList.removeWhere((troc) => troc.id ==id);
+      for(int i=1; i<= _trocList.length; i++ ){
+        _trocList.map((troc) {
+          troc.id == i;
+        }
+      );
+      }
+      notifyListeners();
     }
 
 }

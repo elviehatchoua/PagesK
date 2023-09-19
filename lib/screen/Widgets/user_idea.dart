@@ -31,9 +31,9 @@ class _UserIdeaState extends State<UserIdea> {
                                 children: [
                                   IconButton(
                                     onPressed : (){
-                                      setState(){
+                                      /* setState(){
                                         isLike = ! isLike;
-                                      }
+                                      } */
                                     },
                                     icon: Icon( isLike == true ?  Icons.thumb_up
                                     : Icons.thumb_up_alt_outlined, color: widget.iconColor),

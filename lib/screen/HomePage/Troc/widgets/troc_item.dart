@@ -1,9 +1,11 @@
 import 'dart:io'; 
 import 'package:finology/Constance/helpers.dart';
+import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
 import 'package:finology/screen/Widgets/troc_description.dart';
 import 'package:finology/screen/Widgets/user_idea.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../main.dart';
 
@@ -67,8 +69,12 @@ class _TrocItemState extends State<TrocItem> {
                           },
                           child: Text("modifier"),
                         ),
-                       const PopupMenuItem  (
+                        PopupMenuItem  (
                           value: "Supprimer",
+                          onTap: () {
+                            Provider.of<TrocProvider>(context, listen: false)
+                              .deleteTroc(widget.idTroc);
+                          },
                           child:  Text("supprimer"),
                         ),
                       ],
