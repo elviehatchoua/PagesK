@@ -1,20 +1,23 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use, library_private_types_in_public_api
 
+import 'package:finology/screen/HomePage/Troc/detail_trop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'Constance/constance.dart' as constance;
 import 'Constance/constance.dart';
 import 'Constance/theme.dart';
-import 'Home/Drawer/drawer.dart';
-import 'Home/Dashbord/dashbord_tab.dart';
-import 'Startup/enter_mobile_number.dart';
-import 'Startup/enter_otp.dart';
-import 'Startup/introduction.dart';
-import 'Startup/login.dart';
-import 'Startup/register.dart';
-import 'Splash/spash_screen.dart';
-import 'Startup/verity_your_identity.dart';
+import 'providers/troc_provider.dart';
+import 'screen/Home/Drawer/drawer.dart';
+import 'screen/Home/Dashbord/dashbord_tab.dart';
+import 'screen/Startup/enter_mobile_number.dart';
+import 'screen/Startup/enter_otp.dart';
+import 'screen/Startup/introduction.dart';
+import 'screen/Startup/login.dart';
+import 'screen/Startup/register.dart';
+import 'screen/Splash/spash_screen.dart';
+import 'screen/Startup/verity_your_identity.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +59,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     Future.delayed(Duration(milliseconds: 1)).then(
         (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
@@ -69,14 +73,23 @@ class _MyAppState extends State<MyApp> {
                   AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
             )));
 
-    return GetMaterialApp(
-      scrollBehavior: ScrollBehavior(
-          androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
-      navigatorKey: NavKey.navKey,
-      theme: AppTheme.getTheme(),
-      debugShowCheckedModeBanner: false,
-      routes: routes,
-    );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TrocProvider(),
+        )
+      ],
+      child: 
+        GetMaterialApp(
+          scrollBehavior: ScrollBehavior(
+              androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
+          navigatorKey: NavKey.navKey,
+          theme: AppTheme.getTheme(),
+          debugShowCheckedModeBanner: false,
+          routes: routes,
+        )
+      );
+    
   }
 
   var routes = <String, WidgetBuilder>{
@@ -89,6 +102,7 @@ class _MyAppState extends State<MyApp> {
     Routes.introduction: (BuildContext context) => IntroductionScreen(),
     Routes.costomeBottomBar: (BuildContext context) => OpenDrawer(),
     Routes.home: (BuildContext context) => Home(),
+    Routes.detailtrop : (BuildContext context) => DetailTrop(),
   };
 }
 
@@ -102,6 +116,7 @@ class Routes {
   static String introduction = "/Startup/introduction";
   static String costomeBottomBar = "/Home/costome_bottombar";
   static String home = "/Home/home";
+  static String detailtrop =  "/detailtrop";
 }
 
 class NavKey {

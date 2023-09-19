@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class AnimationCard extends StatelessWidget {
   const AnimationCard({
     required this.child,
