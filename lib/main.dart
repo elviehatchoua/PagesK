@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use, library_private_types_in_public_api
 
 import 'package:finology/screen/HomePage/Troc/detail_trop.dart';
+import 'package:finology/screen/HomePage/personal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -105,6 +106,7 @@ class _MyAppState extends State<MyApp> {
     Routes.home: (BuildContext context) => Home(),
     Routes.detailtrop : (BuildContext context) => DetailTrop(),
     Routes.TROC : (BuildContext context) => Troc(),
+    Routes.personnalpage :  (BuildContext context) => PersonalPage()
   };
 }
 
@@ -120,6 +122,8 @@ class Routes {
   static String home = "/Home/home";
   static String detailtrop =  "/detailtrop";
   static String TROC = "/HomePage/Troc";
+  static String personnalpage= "/personnalpage";
+
 }
 
 class NavKey {

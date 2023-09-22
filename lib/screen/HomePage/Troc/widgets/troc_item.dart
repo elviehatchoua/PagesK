@@ -15,10 +15,12 @@ class TrocItem extends StatefulWidget {
   final String ? idTroc;
   final String objetARecevoir;
   final String commentaire;
+  bool isPersonal =false;
    var imageTroc;
 
 
     TrocItem({
+      required this.isPersonal,
       required this.commentaire,
       required this.objetARecevoir,
       required this.valeurNet ,
@@ -53,7 +55,17 @@ class _TrocItemState extends State<TrocItem> {
                       padding: const EdgeInsets.only(left : 16.0, bottom: 8, right: 8),
                       child: Row(
                         children: [
-                          const CircleAvatar(radius : 23),
+                          GestureDetector(
+                            onTap: () {
+                              if(widget.isPersonal== false)
+                              {
+                                Navigator.pushNamed(context, 
+                                  Routes.personnalpage, arguments: {'trocId':widget.idTroc, 'name': widget.userName}
+                                );
+                              }
+                            },
+                            child: const CircleAvatar(radius : 23)
+                          ),
                           const SizedBox(width: 5,),
                            Text(widget.userName),
                           const Spacer(),

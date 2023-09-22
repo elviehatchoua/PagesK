@@ -71,4 +71,17 @@ class TrocProvider with ChangeNotifier{
       notifyListeners();
     }
 
+//list troc
+
+  List<TrocModel> getTrocById(String ? idTroc){
+    List<TrocModel> ownList= [];
+    for(int i = 0; i<_trocList.length; i++)
+    {
+      if(_trocList[i].userName == idTroc ){
+        ownList.add(_trocList[i]);
+      }
+    }
+    return ownList;
+  }
+
 }

@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:finology/core/Models/troc_model.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/Widgets/user_input.dart';
@@ -7,13 +10,14 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:finology/Constance/constance.dart';
 import 'package:provider/provider.dart';
+import '../../Widgets/bottom_sheet.dart';
 import 'troc_creating_head.dart';
 
 class TrocCreation extends StatefulWidget {
   String ? trocId;
-  bool ? isEdit= false;
+  bool isEdit= false;
  // final Function ? addTroc;
-   TrocCreation( {this.trocId,this.isEdit,super.key});
+   TrocCreation( {this.trocId,required this.isEdit,super.key});
 
   @override
   State<TrocCreation> createState() => _TrocCreationState();
@@ -49,7 +53,10 @@ class _TrocCreationState extends State<TrocCreation> {
   void takeImagePath(XFile imagePicked){
 
     setState(() {
+      
       imagePath=imagePicked ;
+
+      
       
     });
   }
@@ -75,7 +82,7 @@ class _TrocCreationState extends State<TrocCreation> {
             TextEditingController(
               text: trocDetail.descriptionTroc
             );
-          imagePath = trocDetail.imagePath;
+          imageFileHead = trocDetail.imagePath;
           print("My image :::::${imagePath}");
       
         }
@@ -97,7 +104,7 @@ class _TrocCreationState extends State<TrocCreation> {
         valeurNetController.text
     ),
     newTroc = TrocModel(
-      imagePath: imagePath,
+      imagePath: imageFileHead,
       objetARecevoir: objetARecevoirController.text, 
       valeurNet: enterredValeurNet <=0 ? 0 :enterredValeurNet, 
       isUrgent: isSwitched, 
@@ -122,6 +129,34 @@ class _TrocCreationState extends State<TrocCreation> {
     }
     Navigator.of(context).pop();
   }
+  var imageFileHead;
+
+   void photoFile (XFile imagePicked) {
+   print(' --------------------image picked: $imagePicked');
+    setState(() {
+        //widget.imageFileHead = imagePicked;
+        imageFileHead = imagePicked;
+       
+      
+    });
+   }
+
+   void _showMyBottomSheet (context) {
+    showModalBottomSheet(
+      elevation:10,
+      backgroundColor : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+           top: Radius.circular(50)
+         )
+       ),
+       context: context, 
+       builder: (context) {
+         return  MyBottomSheet(photoFile);
+        }
+    );
+}
+//final scaffoldState = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -150,8 +185,58 @@ class _TrocCreationState extends State<TrocCreation> {
         child: Column(
         
           children: [
-                  TrocCreatingHead(imagePath,
-                   widget.isEdit== true? true : false),
+            Stack (
+                  clipBehavior: Clip.none, // les elements se cachent ou non
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                      imageFileHead == null 
+                    ?
+                      Container(
+                          height: 150,
+                          color: Colors.grey,
+                    
+                        )
+                    : 
+                    SizedBox(
+                      width: double.infinity,
+                      height: 250,
+                      child:  imageFileHead is String 
+                      ?
+                       Image.asset( imageFileHead,fit: BoxFit.cover)
+                      : 
+                       Image.file( File( imageFileHead.path) , fit: BoxFit.cover),
+
+                    ),
+                    Positioned(
+                        top: imageFileHead == null ? 120 : 230,
+                        right:20,
+                        child: CircleAvatar(
+                          radius: 23,
+                          backgroundColor:  imageFileHead == null ? Colors.blue : Colors.grey,
+                          child: InkWell(
+                             onTap: () {
+                             _showMyBottomSheet(context);
+                            }, 
+                            child: const Icon(Icons.add_a_photo_outlined)
+                          ),
+                        ),
+                      ), 
+                   
+                  ],
+    ),
+                  /* TrocCreatingHead(
+                    widget.isEdit == true 
+                    ?
+                      null: takeImagePath,
+                    
+                     widget.isEdit == true 
+                    ? 
+                      imagePath : null,
+
+                     isReceive: widget.isEdit== true 
+                    ?
+                    true:false,
+                  ), */
                   const SizedBox(height: 30,),
                    Container(
                     margin: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),
@@ -254,3 +339,5 @@ class _TrocCreationState extends State<TrocCreation> {
     );
   }
 }
+
+

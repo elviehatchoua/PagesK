@@ -128,6 +128,7 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
               itemCount: trocList.length,
               itemBuilder: (context, index){
                 return TrocItem(
+                  isPersonal: false,
                   idTroc: trocList[index].id,
                   commentaire: trocList[index].descriptionTroc,  
                   imageTroc: trocList[index].imagePath, 
