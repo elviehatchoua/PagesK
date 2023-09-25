@@ -1,13 +1,13 @@
 import 'package:finology/core/Models/troc_model.dart';
 import 'package:flutter/material.dart';
 
-import '../Constance/constance.dart';
+//import '../Constance/constance.dart';
 
 
 class TrocProvider with ChangeNotifier{
 
   final List<TrocModel> _trocList = [
-    TrocModel(
+    /* TrocModel(
       id: "1",
     descriptionTroc: 'Bonjour ici, j\'ai une chaussure addidas à vendre, bon prix.',
     imagePath: ConstanceData.adiddas,
@@ -39,7 +39,7 @@ class TrocProvider with ChangeNotifier{
     objetARecevoir: 'un sac',
     categorie: "appareil"
 
-  ),
+  ),  */
   ];
 
   //read
@@ -48,9 +48,10 @@ class TrocProvider with ChangeNotifier{
   }
 //create
   void addNewTroc(TrocModel txTroc){
-    txTroc.id == "${_trocList.length +1}";
-
+    txTroc.id = "${_trocList.length +1}";
+    TrocModel tc = txTroc;
     _trocList.insert(0,txTroc);
+    print("my troc list print{$tc}");
     notifyListeners();
   }
 //edit

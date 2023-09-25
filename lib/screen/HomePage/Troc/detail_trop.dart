@@ -45,15 +45,17 @@ class _DetailTropState extends State<DetailTrop> {
             child: Center(
               child: SizedBox(
                 height: 450,
-                child: imgTroc['image'] is String
+                child: /* imgTroc['image'] is String
                     ? PhotoView(
                         imageProvider: AssetImage(imgTroc['image']),
                         minScale: PhotoViewComputedScale.contained * 0.8,
                         maxScale: PhotoViewComputedScale.covered * 2.0,
                       )
-                    : PhotoView(
+                    : */ PhotoView(
                         imageProvider:
-                            FileImage(File(imgTroc['image'].path)),
+                            FileImage(File(imgTroc['image'])),
+                        minScale: PhotoViewComputedScale.contained * 0.8,
+                        maxScale: PhotoViewComputedScale.covered * 2.0,
                       ),
               ),
             ),

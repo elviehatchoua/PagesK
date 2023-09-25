@@ -13,9 +13,34 @@ class UserIdea extends StatefulWidget {
 
 class _UserIdeaState extends State<UserIdea> {
   //const UserIdea({super.key});
+    bool isLike = true;
+    void _isklicked(){
+      setState(() {
+        isLike =! isLike;
+      });
+    }
+
+     void _showMyCommentBottomSheet (context) {
+    showModalBottomSheet(
+      elevation:10,
+      backgroundColor : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+           top: Radius.circular(50)
+         )
+       ),
+       context: context, 
+       builder: (context) => FractionallySizedBox(
+        heightFactor: 2.4,
+        child:UserComment() ,)
+       );
+       /* {
+         return  UserComment();
+        }
+    );*/
+}
   @override
   Widget build(BuildContext context) {
-    bool isLike = false;
      var TextTheme = Theme.of(context).textTheme;
     return  Padding(
                       padding: const EdgeInsets.only(bottom: 8),
@@ -30,12 +55,8 @@ class _UserIdeaState extends State<UserIdea> {
                               child :  Row(
                                 children: [
                                   IconButton(
-                                    onPressed : (){
-                                      /* setState(){
-                                        isLike = ! isLike;
-                                      } */
-                                    },
-                                    icon: Icon( isLike == true ?  Icons.thumb_up
+                                    onPressed : () => _isklicked(),
+                                    icon: Icon( isLike==false ?  Icons.thumb_up
                                     : Icons.thumb_up_alt_outlined, color: widget.iconColor),
                                   ),
                                   //Icon(Icons.thumb_up, color: iconColor),
@@ -53,15 +74,15 @@ class _UserIdeaState extends State<UserIdea> {
                               width: 125,
                               height: 40,
                               child : GestureDetector(
-                                onTap: () {
-                                showBottomSheet(
+                                onTap: () {_showMyCommentBottomSheet(context);},
+                               /*  showBottomSheet(
                                   context: context, 
                                   builder: ((builder)=>const FractionallySizedBox(
                                     heightFactor : 0.8,
                                     child:  SingleChildScrollView(child: UserComment())
                                   ))
-                                );
-                                },
+                                ); */
+                              
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

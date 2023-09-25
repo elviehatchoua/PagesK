@@ -90,7 +90,7 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                                     ), 
                                     onPressed: () {
                                       push ( context, 
-                                        TrocCreation(trocId: null, isEdit: false,)
+                                        TrocCreation(trocId: null, isEdit: false,isImageCharge: false,)
                                       );
                                       
                                        /* Navigator.push( context,

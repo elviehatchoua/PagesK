@@ -76,7 +76,7 @@ class _TrocItemState extends State<TrocItem> {
                           value: "modifier",
                           onTap: () {
                             push(
-                              context, TrocCreation(trocId:widget.idTroc, isEdit: true,)
+                              context, TrocCreation(trocId:widget.idTroc, isEdit: true,isImageCharge: true,)
                             );
                           },
                           child: Text("modifier"),
@@ -122,11 +122,11 @@ class _TrocItemState extends State<TrocItem> {
                          child: SizedBox(
                             height: 450,
                             width: double.infinity,
-                            child:widget.imageTroc is String 
+                            child:/* widget.imageTroc is String 
                             ?
                             Image.asset( widget.imageTroc,fit: BoxFit.cover)
-                            :
-                            Image.file( File(widget.imageTroc.path) , fit: BoxFit.cover),
+                            : */
+                            Image.file( File(widget.imageTroc) , fit: BoxFit.cover),
         
                           ),
                        ),
