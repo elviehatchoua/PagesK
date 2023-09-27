@@ -48,80 +48,152 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
           ),
         ];
        },
-      body: ListView(
-        padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).padding.bottom + defaultPadding),
-        children: [ Padding (
+      body: SingleChildScrollView(
+        child: Container(
             padding: EdgeInsets.only(
-                top: MediaQueryHeight / 70,
-                //right: MediaQueryWidth / 30,
-                //left: MediaQueryWidth / 30,
-                bottom: MediaQueryHeight / 40),
+              bottom: MediaQuery.of(context).padding.bottom + defaultPadding),
             child: Column(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.only(top: MediaQueryHeight / 70,left: MediaQueryWidth / 30),
-                    height: 80,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [                
-                           SizedBox(height:defaultPadding ,), 
-                            const CircleAvatar(radius: 23),
-                            const SizedBox(width: defaultPadding),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 245,
-                                  height: 50,
-                                  child : ElevatedButton(
-                                    style : ElevatedButton.styleFrom(
-                                      side: const BorderSide(
-                                        width: 1.0,
-                                        color: Colors.blue,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),   
-                                      ),
-                                      backgroundColor: Colors.white,
-                                      elevation: 0
-                                    ), 
-                                    onPressed: () {
-                                      push ( context, 
-                                        TrocCreation(trocId: null, isEdit: false,)
-                                      );
-                                      
-                                       /* Navigator.push( context,
-                                       MaterialPageRoute(builder: (context) => TrocCreation(addTroc) )
-                                      );  */
-
-                                     //Navigator.of(context).push(_createRoute());
-
-                                    }, 
-                                    child: Text("Un nouveau troc, vous tente?", 
-                                      style: TextTheme.bodySmall!.copyWith(
-                                        fontWeight: FontWeight.bold, 
-                                        fontSize: 14
+              children: <Widget>
+              [
+                Padding (
+                padding: EdgeInsets.only(
+                    top: MediaQueryHeight / 70,
+                    //right: MediaQueryWidth / 30,
+                    //left: MediaQueryWidth / 30,
+                    bottom: MediaQueryHeight / 40),
+                child: Column(
+                    children: <Widget>[
+                      Container(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        padding: EdgeInsets.only(top: MediaQueryHeight / 70,left: MediaQueryWidth / 30),
+                        height: 80,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [                
+                               SizedBox(height:defaultPadding ,), 
+                                const CircleAvatar(radius: 23),
+                                const SizedBox(width: defaultPadding),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 245,
+                                      height: 50,
+                                      child : ElevatedButton(
+                                        style : ElevatedButton.styleFrom(
+                                          side: const BorderSide(
+                                            width: 1.0,
+                                            color: Colors.blue,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(15),   
+                                          ),
+                                          backgroundColor: Colors.white,
+                                          elevation: 0
+                                        ), 
+                                        onPressed: () {
+                                          push ( context, 
+                                            TrocCreation(trocId: null, isEdit: false,)
+                                          );
+                                          
+                                           /* Navigator.push( context,
+                                           MaterialPageRoute(builder: (context) => TrocCreation(addTroc) )
+                                          );  */
+          
+                                         //Navigator.of(context).push(_createRoute());
+          
+                                        }, 
+                                        child: Text("Un nouveau troc, vous tente?", 
+                                          style: TextTheme.bodySmall!.copyWith(
+                                            fontWeight: FontWeight.bold, 
+                                            fontSize: 14
+                                          )
+                                        ),
                                       )
-                                    ),
-                                  )
-                                ),           
+                                    ),           
+                            ],
+                          ),
+                          SizedBox(width: 10,),
+                          Icon(Icons.style)
                         ],
-                      ),
-                      SizedBox(width: 10,),
-                      Icon(Icons.style)
+                      ),  
+                          ],
+                        ),
+                      )
                     ],
-                  ),  
+                  ),
+              ),
+              Container (
+                height: 190,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                margin: EdgeInsets.only(bottom: MediaQueryHeight / 40),
+                child: ListView.builder(
+                  padding: EdgeInsets.only(left: MediaQueryWidth / 30),
+                  itemCount: 3,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) => Row(
+                    children: [
+                      Container(
+                        width: MediaQueryWidth / 3,
+                        padding: const EdgeInsets.all(defaultPadding),
+                        margin: const EdgeInsets.only(
+                          right: defaultPadding, top: 5, left: 3, bottom: 5),
+                        decoration: BoxDecoration(
+                          color:Theme.of(context).backgroundColor,
+                          borderRadius: BorderRadius.circular(defaultRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color:Theme.of(context).disabledColor,
+                              blurRadius: 5,
+                              spreadRadius: 2
+                            ),
                       ],
                     ),
-                  )
+                    child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.add),
+                              Text("faire un"),
+                              Text("pret")
+                            ],
+                          )
+                  ),
                 ],
               ),
             ),
+          ), 
+      
+              Column(
+                children: trocList.map((e) {
+                  return TrocItem(
+                    isPersonal: false,
+                    idTroc: e.id,
+                    commentaire:e.descriptionTroc,  
+                    imageTroc: e.imagePath, 
+                    userName: e.userName, 
+                    valeurNet: e.valeurNet, 
+                    objetARecevoir:e.objetARecevoir,
+                  );
+                }).toList()
+              ),
+          
+            ],
+          
+            ),
+          ),
+      ),
+        /* padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom + defaultPadding), */
+      
+
+          //Troc part
+
+
+
+
            //ListView Builder
-           Container(
+    /*        Container(
             height: 500,
              child: ListView.builder(
               //reverse: true,
@@ -137,9 +209,9 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                   objetARecevoir: trocList[index].objetARecevoir,
                 );
              }),
-           )
-      ]
-    ),
+           ) */
+      
+    
   );
   }
 }
