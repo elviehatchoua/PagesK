@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:finology/Constance/helpers.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
-import 'package:finology/screen/Widgets/troc_description.dart';
+import 'package:finology/screen/HomePage/Troc/widgets/troc_description.dart';
 import 'package:finology/screen/Widgets/user_idea.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

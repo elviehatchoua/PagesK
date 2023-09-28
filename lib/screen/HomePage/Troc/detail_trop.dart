@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:finology/screen/Widgets/troc_description.dart';
+import 'package:finology/screen/HomePage/Troc/widgets/troc_description.dart';
 import 'package:finology/screen/Widgets/user_idea.dart';
 import 'package:flutter/material.dart';
 

@@ -124,45 +124,115 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                     ],
                   ),
               ),
+
+              //after nouveau troc
+
               Container (
                 height: 190,
                 color: Theme.of(context).scaffoldBackgroundColor,
                 margin: EdgeInsets.only(bottom: MediaQueryHeight / 40),
-                child: ListView.builder(
-                  padding: EdgeInsets.only(left: MediaQueryWidth / 30),
-                  itemCount: 3,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) => Row(
-                    children: [
-                      Container(
-                        width: MediaQueryWidth / 3,
-                        padding: const EdgeInsets.all(defaultPadding),
-                        margin: const EdgeInsets.only(
-                          right: defaultPadding, top: 5, left: 3, bottom: 5),
-                        decoration: BoxDecoration(
-                          color:Theme.of(context).backgroundColor,
-                          borderRadius: BorderRadius.circular(defaultRadius),
-                          boxShadow: [
-                            BoxShadow(
-                              color:Theme.of(context).disabledColor,
-                              blurRadius: 5,
-                              spreadRadius: 2
-                            ),
-                      ],
-                    ),
-                    child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(Icons.add),
-                              Text("faire un"),
-                              Text("pret")
+                child: Row(
+                  children: [
+                    /*  Container(
+                              width: MediaQueryWidth / 3,
+                              padding: const EdgeInsets.all(defaultPadding),
+                              margin: const EdgeInsets.only(
+                                right: defaultPadding, top: 5, left: 3, bottom: 5),
+                              decoration: BoxDecoration(
+                                color:Theme.of(context).backgroundColor,
+                                borderRadius: BorderRadius.circular(defaultRadius),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:Theme.of(context).disabledColor,
+                                    blurRadius: 5,
+                                    spreadRadius: 2
+                                  ),
                             ],
-                          )
-                  ),
-                ],
-              ),
-            ),
+                          ),
+                          child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.add),
+                                    Text("faire un"),
+                                    Text("pret")
+                                  ],
+                                )
+                        ),
+                    const Text("Hello"), */
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.only(left: MediaQueryWidth / 30),
+                        itemCount: 3,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          if(index == 0)
+                          {
+                            return Container(
+                              width: MediaQueryWidth / 3,
+                              padding: const EdgeInsets.all(defaultPadding),
+                              margin: const EdgeInsets.only(
+                                right: defaultPadding, top: 5, left: 3, bottom: 5),
+                              decoration: BoxDecoration(
+                                color:Theme.of(context).backgroundColor,
+                                borderRadius: BorderRadius.circular(defaultRadius),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:Theme.of(context).disabledColor,
+                                    blurRadius: 5,
+                                    spreadRadius: 2
+                                  ),
+                                ],
+                             ),
+                             child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                     const SizedBox(
+                                      height: 5,
+                                     ),
+                                     Text('Qui peut me faire un pret de 1000Fcfa', style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),),
+                                     Text("Rostow", style:TextStyle( fontSize: 13, fontWeight: FontWeight.bold))
+
+                                  ],
+                              )
+                          );
+                          }
+                          else{ 
+
+                            return Container(
+                              width: MediaQueryWidth / 3,
+                              padding: const EdgeInsets.all(defaultPadding),
+                              margin: const EdgeInsets.only(
+                                right: defaultPadding, top: 5, left: 3, bottom: 5),
+                              decoration: BoxDecoration(
+                                color:Theme.of(context).backgroundColor,
+                                borderRadius: BorderRadius.circular(defaultRadius),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:Theme.of(context).disabledColor,
+                                    blurRadius: 5,
+                                    spreadRadius: 2
+                                  ),
+                            ],
+                          ),
+                          child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.add),
+                                    Text("faire un"),
+                                    Text("pret")
+                                  ],
+                                )
+                        );
+                          }
+                        }
+                      
+                                  
+                                ),
+                    ),
+                  ],
+                ),
           ), 
+          //after pret
       
               Column(
                 children: trocList.map((e) {
