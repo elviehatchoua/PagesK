@@ -3,7 +3,7 @@
 //import 'dart:developer';
 import 'package:animations/animations.dart';
 import 'package:finology/Constance/theme.dart';
-import 'package:finology/screen/HomePage/Pret/pret.dart';
+import 'package:finology/screen/HomePage/Pret/detail_pret.dart';
 import 'package:finology/screen/HomePage/Transfert/transfert.dart';
 
 import 'package:flutter/services.dart';

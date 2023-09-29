@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Pret extends StatelessWidget {
-  const Pret({super.key});
+class DetailPret extends StatelessWidget {
+  const DetailPret({super.key});
 
   @override
   Widget build(BuildContext context) {

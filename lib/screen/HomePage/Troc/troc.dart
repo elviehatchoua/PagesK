@@ -1,5 +1,7 @@
+import 'package:finology/providers/pret_provider.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
+import 'package:finology/screen/HomePage/Troc/widgets/pret_item.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
 import 'package:provider/provider.dart';
 import '../../../Constance/helpers.dart';
@@ -21,6 +23,7 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final trocList = Provider.of<TrocProvider>(context, listen:true).trocList;
+    final pretList = Provider.of<PretProvider>(context, listen: true).MyPretList;
   //var ThemeColor = Theme.of(context);
   var TextTheme = Theme.of(context).textTheme;
    var MediaQueryWidth = MediaQuery.of(context).size.width;
@@ -133,36 +136,10 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                 margin: EdgeInsets.only(bottom: MediaQueryHeight / 40),
                 child: Row(
                   children: [
-                    /*  Container(
-                              width: MediaQueryWidth / 3,
-                              padding: const EdgeInsets.all(defaultPadding),
-                              margin: const EdgeInsets.only(
-                                right: defaultPadding, top: 5, left: 3, bottom: 5),
-                              decoration: BoxDecoration(
-                                color:Theme.of(context).backgroundColor,
-                                borderRadius: BorderRadius.circular(defaultRadius),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color:Theme.of(context).disabledColor,
-                                    blurRadius: 5,
-                                    spreadRadius: 2
-                                  ),
-                            ],
-                          ),
-                          child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.add),
-                                    Text("faire un"),
-                                    Text("pret")
-                                  ],
-                                )
-                        ),
-                    const Text("Hello"), */
                     Expanded(
                       child: ListView.builder(
                         padding: EdgeInsets.only(left: MediaQueryWidth / 30),
-                        itemCount: 3,
+                        itemCount: pretList.length+1,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           if(index == 0)
@@ -184,45 +161,21 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                                 ],
                              ),
                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                     const SizedBox(
-                                      height: 5,
-                                     ),
-                                     Text('Qui peut me faire un pret de 1000Fcfa', style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),),
-                                     Text("Rostow", style:TextStyle( fontSize: 13, fontWeight: FontWeight.bold))
-
+                                    Icon(Icons.add_circle, color: Colors.blue,),
+                                    Text("faire un"),
+                                    Text("pret")
                                   ],
                               )
                           );
                           }
                           else{ 
 
-                            return Container(
-                              width: MediaQueryWidth / 3,
-                              padding: const EdgeInsets.all(defaultPadding),
-                              margin: const EdgeInsets.only(
-                                right: defaultPadding, top: 5, left: 3, bottom: 5),
-                              decoration: BoxDecoration(
-                                color:Theme.of(context).backgroundColor,
-                                borderRadius: BorderRadius.circular(defaultRadius),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color:Theme.of(context).disabledColor,
-                                    blurRadius: 5,
-                                    spreadRadius: 2
-                                  ),
-                            ],
-                          ),
-                          child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.add),
-                                    Text("faire un"),
-                                    Text("pret")
-                                  ],
-                                )
-                        );
+                            return PretItem(
+                              description:pretList[index].description ,
+                              userName: pretList[index].userName,
+                            );
                           }
                         }
                       

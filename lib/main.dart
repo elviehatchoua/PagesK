@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use, library_private_types_in_public_api
 
+import 'package:finology/providers/pret_provider.dart';
 import 'package:finology/screen/HomePage/Troc/detail_trop.dart';
 import 'package:finology/screen/HomePage/personal_page.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'Constance/theme.dart';
 import 'providers/troc_provider.dart';
 import 'screen/Home/Drawer/drawer.dart';
 import 'screen/Home/Dashbord/dashbord_tab.dart';
+import 'screen/HomePage/Pret/detail_pret.dart';
 import 'screen/HomePage/Troc/troc.dart';
 import 'screen/Startup/enter_mobile_number.dart';
 import 'screen/Startup/enter_otp.dart';
@@ -79,6 +81,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (context) => TrocProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PretProvider(),
         )
       ],
       child: 
@@ -106,7 +111,8 @@ class _MyAppState extends State<MyApp> {
     Routes.home: (BuildContext context) => Home(),
     Routes.detailtrop : (BuildContext context) => DetailTrop(),
     Routes.TROC : (BuildContext context) => Troc(),
-    Routes.personnalpage :  (BuildContext context) => PersonalPage()
+    Routes.personnalpage :  (BuildContext context) => PersonalPage(),
+    Routes.detailpret : (BuildContext context) => DetailPret(),
   };
 }
 
@@ -123,6 +129,7 @@ class Routes {
   static String detailtrop =  "/detailtrop";
   static String TROC = "/HomePage/Troc";
   static String personnalpage= "/personnalpage";
+  static String detailpret = "/Pret/detail_pret";
 
 }
 

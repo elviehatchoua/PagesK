@@ -1,6 +1,7 @@
 import 'package:finology/Constance/constance.dart';
+import 'package:finology/core/Models/pret_model.dart';
 import 'package:finology/providers/troc_provider.dart';
-import 'package:finology/screen/HomePage/Pret/pret.dart';
+import 'package:finology/screen/HomePage/Pret/detail_pret.dart';
 import 'package:finology/screen/HomePage/Transfert/transfert.dart';
 import 'package:finology/screen/HomePage/Troc/troc.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
@@ -153,7 +154,7 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
 
                         ), 
                         Transfert(),
-                        Pret()
+                        //PretModel()
                           //height: 400,
                           /* ListView.builder(
                           itemCount: TrocL.length,

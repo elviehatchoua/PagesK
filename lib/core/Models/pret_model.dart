@@ -1,6 +1,16 @@
-import 'package:finology/core/Models/base.dart';
+import 'dart:core';
 
-class Pret extends BaseModel{
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+
+import 'base.dart';
+
+part "pret_model.g.dart";
+
+@JsonSerializable()
+
+class PretModel extends BaseModel{
   String ? description;
   double montantDuPret;
   DateTime dateDeLaDemande;
@@ -8,8 +18,9 @@ class Pret extends BaseModel{
   String raison;
   int tauxDinteret;
   bool? status;
+  String userName;
 
-  Pret({
+  PretModel({
     super.id,
     this.description,
     required this.montantDuPret,
@@ -17,13 +28,14 @@ class Pret extends BaseModel{
     required this.dateDeRembourssement,
     required this.raison,
     required this.tauxDinteret,
+    required this.userName,
     this.status
   });
 
-   factory TrocModel.fromJson(Map<String, dynamic> json) =>
-      _$TrocModelFromJson(json);
+   factory PretModel.fromJson(Map<String, dynamic> json) =>
+      _$PretModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrocModelToJson(this);
+  Map<String, dynamic> toJson() => _$PretModelToJson(this);
 
 //annotation
   @override
