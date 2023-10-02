@@ -18,7 +18,9 @@ class DetailPret extends StatefulWidget {
 class _DetailPretState extends State<DetailPret> with TickerProviderStateMixin  {
   final CarouselController carouselController = CarouselController();
     int currentIndex =0;
-  late AnimationController controller;
+    late AnimationController controller;
+    bool isAutoPlayEnabled = true;
+    bool isProgressIndicatorPlaying = true; 
 
   @override
   void didChangeDependencies() {
@@ -51,45 +53,57 @@ class _DetailPretState extends State<DetailPret> with TickerProviderStateMixin  
 
       body:Stack(
         children: [
-          CarouselSlider(
-                          items: pretList.map((item) => DetailPretItem(
-                             description: item.description,
-                             montantDuPret: item.montantDuPret,
-                             dateDeLaDemande: item.dateDeLaDemande,
-                             dateDeRembourssement: item.dateDeRembourssement,
-                             raison: item.raison,
-                             tauxDinteret : item.tauxDinteret,
-                             userName : item.userName,
-                             idPret: item.id
-                          )
-                              ).toList(),
-                          carouselController: carouselController,
-                          options: CarouselOptions(
-                            autoPlayInterval: Duration(seconds: 5),
-                            height: 900,
-                            initialPage: int.parse(PretI.id!)-1,
-                            scrollDirection: Axis.horizontal,
-                            scrollPhysics: const BouncingScrollPhysics(),
-                            autoPlay: true,
-                            aspectRatio: 2,
-                            viewportFraction: 1,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                print("my  index ${index}");
-      
-                                     currentIndex == index;
-                              });
-                            }
-                          ),           
-        ),
+          GestureDetector(
+            onDoubleTap: () {
+              setState(() {
+                isAutoPlayEnabled =! isAutoPlayEnabled;
+                isProgressIndicatorPlaying = ! isProgressIndicatorPlaying;
+                isProgressIndicatorPlaying ? controller.forward(from:(controller.value)-0.7) : controller.stop();
+              });
+            },
+            child: CarouselSlider(
+                            items: pretList.map((item) => DetailPretItem(
+                               description: item.description,
+                               montantDuPret: item.montantDuPret,
+                               dateDeLaDemande: item.dateDeLaDemande,
+                               dateDeRembourssement: item.dateDeRembourssement,
+                               raison: item.raison,
+                               tauxDinteret : item.tauxDinteret,
+                               userName : item.userName,
+                               idPret: item.id
+                            )
+                                ).toList(),
+                            carouselController: carouselController,
+                            options: CarouselOptions(
+                              pauseAutoPlayOnTouch: true,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 5),
+                              height: 900,
+                              initialPage: int.parse(PretI.id!)-1,
+                              scrollDirection: Axis.horizontal,
+                              scrollPhysics: const BouncingScrollPhysics(),
+                              aspectRatio: 2,
+                              viewportFraction: 1, //to see only one elmt on the screen
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  print("my  index ${index}");
+                
+                                       currentIndex == index;
+                                });
+                              controller.forward(from: 0); 
+
+                              }
+                            ),           
+                  ),
+          ),
         
-        Align(
+       Align(
           alignment: Alignment.bottomCenter,
             child:             LinearProgressIndicator(
               value: controller.value,
               semanticsLabel: 'Linear progress indicator',
             ),
-        )
+        ) 
         ]
       ),
     );
