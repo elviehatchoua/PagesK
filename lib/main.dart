@@ -129,7 +129,7 @@ class Routes {
   static String detailtrop =  "/detailtrop";
   static String TROC = "/HomePage/Troc";
   static String personnalpage= "/personnalpage";
-  static String detailpret = "/Pret/detail_pret";
+  static String detailpret = "/HomePage/Pret/detail_pret";
 
 }
 

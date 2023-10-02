@@ -1,9 +1,6 @@
 import 'package:finology/Constance/constance.dart';
-import 'package:finology/core/Models/pret_model.dart';
 import 'package:finology/providers/troc_provider.dart';
-import 'package:finology/screen/HomePage/Pret/detail_pret.dart';
 import 'package:finology/screen/HomePage/Transfert/transfert.dart';
-import 'package:finology/screen/HomePage/Troc/troc.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +32,6 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
   
   @override
   Widget build(BuildContext context) {
-    var ThemeColor = Theme.of(context);
     var TextTheme = Theme.of(context).textTheme;
     final myTrocLIst = ModalRoute.of(context)!.settings.arguments as Map;
     final TrocL = Provider.of<TrocProvider>(context, listen: true).getTrocById(myTrocLIst['name']);

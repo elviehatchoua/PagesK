@@ -1,11 +1,11 @@
 import 'package:finology/providers/pret_provider.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
-import 'package:finology/screen/HomePage/Troc/widgets/pret_item.dart';
+import 'package:finology/screen/HomePage/Pret/widgets/pret_item.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
 import 'package:provider/provider.dart';
 import '../../../Constance/helpers.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finology/screen/Widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '/Constance/constance.dart';
@@ -19,6 +19,8 @@ class Troc extends StatefulWidget {
 
 class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
 
+  final CarouselController carouselController = CarouselController();
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -129,26 +131,21 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
               ),
 
               //after nouveau troc
+              
+
+              //after first element of the scrollable view
 
               Container (
                 height: 190,
                 color: Theme.of(context).scaffoldBackgroundColor,
-                margin: EdgeInsets.only(bottom: MediaQueryHeight / 40),
+                margin: EdgeInsets.only(bottom: MediaQueryHeight / 40, left:3 ),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.only(left: MediaQueryWidth / 30),
-                        itemCount: pretList.length+1,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          if(index == 0)
-                          {
-                            return Container(
-                              width: MediaQueryWidth / 3,
+                    Container(
+                              width: MediaQueryWidth / 4,
                               padding: const EdgeInsets.all(defaultPadding),
                               margin: const EdgeInsets.only(
-                                right: defaultPadding, top: 5, left: 3, bottom: 5),
+                                 top: 5, left: 3, bottom: 5),
                               decoration: BoxDecoration(
                                 color:Theme.of(context).backgroundColor,
                                 borderRadius: BorderRadius.circular(defaultRadius),
@@ -168,19 +165,21 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
                                     Text("pret")
                                   ],
                               )
-                          );
-                          }
-                          else{ 
-
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.only(left: MediaQueryWidth / 30),
+                        itemCount: pretList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
                             return PretItem(
+                              idPret: pretList[index].id,
                               description:pretList[index].description ,
                               userName: pretList[index].userName,
                             );
-                          }
-                        }
-                      
-                                  
-                                ),
+                          
+                        }             
+                      ),
                     ),
                   ],
                 ),

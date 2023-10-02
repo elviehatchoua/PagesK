@@ -13,7 +13,7 @@ part "pret_model.g.dart";
 class PretModel extends BaseModel{
   String ? description;
   double montantDuPret;
-  DateTime dateDeLaDemande;
+  String dateDeLaDemande;
   DateTime dateDeRembourssement;
   String raison;
   int tauxDinteret;

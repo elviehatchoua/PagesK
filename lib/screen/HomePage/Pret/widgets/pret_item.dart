@@ -1,17 +1,18 @@
 import 'package:finology/Constance/constance.dart';
 import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
+import '../../../../main.dart';
 
 class PretItem extends StatelessWidget {
    String ? description;
    double ?  montantDuPret;
-   DateTime ? dateDeLaDemande;
+   String ? dateDeLaDemande;
    DateTime ? dateDeRembourssement;
    String ? raison;
    int ? tauxDinteret;
    bool ? status;
    String userName;
    bool ? isAddWidget;
+   String ? idPret;
   
    PretItem({
     super.key,
@@ -24,6 +25,7 @@ class PretItem extends StatelessWidget {
     required this.userName,
      this.isAddWidget,
      this.status,
+     this.idPret
     }) ;
 
 
@@ -34,7 +36,9 @@ class PretItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        
+         Navigator.pushNamed(context, 
+          Routes.detailpret, arguments: {'pretid':idPret}
+                                );
       },
       child: Container(
         width: MediaQueryWidth / 3,

@@ -10,7 +10,7 @@ PretModel _$PretModelFromJson(Map<String, dynamic> json) => PretModel(
       id: json['_id'] as String?,
       description: json['description'] as String?,
       montantDuPret: (json['montantDuPret'] as num).toDouble(),
-      dateDeLaDemande: DateTime.parse(json['dateDeLaDemande'] as String),
+      dateDeLaDemande: json['dateDeLaDemande'] as String,
       dateDeRembourssement:
           DateTime.parse(json['dateDeRembourssement'] as String),
       raison: json['raison'] as String,
@@ -33,7 +33,7 @@ Map<String, dynamic> _$PretModelToJson(PretModel instance) => <String, dynamic>{
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'description': instance.description,
       'montantDuPret': instance.montantDuPret,
-      'dateDeLaDemande': instance.dateDeLaDemande.toIso8601String(),
+      'dateDeLaDemande': instance.dateDeLaDemande,
       'dateDeRembourssement': instance.dateDeRembourssement.toIso8601String(),
       'raison': instance.raison,
       'tauxDinteret': instance.tauxDinteret,

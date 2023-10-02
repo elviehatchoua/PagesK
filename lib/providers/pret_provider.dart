@@ -10,7 +10,7 @@ class PretProvider with ChangeNotifier{
       id: "1",
       description: 'j\'ai besoin de cette argent',
       montantDuPret: 1000, 
-      dateDeLaDemande: DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
+      dateDeLaDemande: DateFormat().add_H().format(DateTime.now()),//DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
       dateDeRembourssement:  DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
       raison: "je veux faire un transfert à ma soeur", 
       tauxDinteret: 10, 
@@ -20,7 +20,7 @@ class PretProvider with ChangeNotifier{
       id: "2",
       description: 'qui peut m\'aider',
       montantDuPret: 2000, 
-      dateDeLaDemande:  DateFormat("dd/MM/yyyy").parse("23/09/2023"),   
+      dateDeLaDemande: DateFormat().add_H().format(DateTime.now()), 
       dateDeRembourssement: DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
       raison: "je veux acheter à manger", 
       tauxDinteret: 10,
@@ -30,7 +30,7 @@ class PretProvider with ChangeNotifier{
       id: "3",
       description: 'j\'ai besoin de cette argent',
       montantDuPret: 1000000000, 
-      dateDeLaDemande: DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
+      dateDeLaDemande:DateFormat().add_H().format(DateTime.now()),  
       dateDeRembourssement: DateFormat("dd/MM/yyyy").parse("23/09/2023"),  
       raison: "je veux une voiture", 
       tauxDinteret: 10,
@@ -42,5 +42,10 @@ class PretProvider with ChangeNotifier{
   List<PretModel> get MyPretList 
   {
     return [... _MyPretList];
+  }
+
+  PretModel getPretById(String idPret)
+  {
+    return _MyPretList.firstWhere((element) => element.id == idPret);
   }
 }
