@@ -2,6 +2,7 @@ import 'package:finology/Constance/constance.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Transfert/transfert.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
   
   @override
   Widget build(BuildContext context) {
+    final _user = Provider.of<User?>(context);
     var TextTheme = Theme.of(context).textTheme;
     final myTrocLIst = ModalRoute.of(context)!.settings.arguments as Map;
     final TrocL = Provider.of<TrocProvider>(context, listen: true).getTrocById(myTrocLIst['name']);
@@ -63,12 +65,12 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
                      children: [
                        CircleAvatar(
                           radius: 23,
-                          backgroundColor:    Colors.blue,
-                              child: InkWell(
-                                onTap: () {
-                                },
+                          backgroundImage: NetworkImage(_user!.photoURL!),
+                         // backgroundColor:    Colors.blue,
+                        /*       child: InkWell(
+                                onTap: () {},
                                 child: const Icon(Icons.account_circle)
-                              ),
+                              ), */
                         ),
                         const SizedBox(width: 20,),
                         Text(myTrocLIst['name'], style: TextStyle(color: Colors.white),),

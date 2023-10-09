@@ -1,12 +1,13 @@
 import 'package:finology/Constance/constance.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../../main.dart';
 import '../../../Widgets/user_idea.dart';
 
 class DetailPretItem extends StatelessWidget {
    String ? description ;
    double ?  montantDuPret ;
-   String ? dateDeLaDemande ;
+   DateTime ? dateDeLaDemande ;
    DateTime ? dateDeRembourssement ;
    String ? raison ;
    int ? tauxDinteret ;
@@ -44,7 +45,7 @@ class DetailPretItem extends StatelessWidget {
                 const SizedBox(width: 20),
                 Text(userName),
                 Spacer(),
-                FittedBox(child: Text("publié à ${dateDeLaDemande}h"),)
+                FittedBox(child: Text("publié le ${DateFormat("dd").format(dateDeLaDemande!)}"),) 
               ],
             ),
             const SizedBox(height: 80,),

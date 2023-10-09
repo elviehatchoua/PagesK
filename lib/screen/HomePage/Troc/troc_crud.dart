@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:finology/core/Models/troc_model.dart';
@@ -16,8 +15,9 @@ import 'troc_creating_head.dart';
 class TrocCreation extends StatefulWidget {
   String ? trocId;
   bool isEdit= false;
+  bool isImageCharge = true;
  // final Function ? addTroc;
-   TrocCreation( {this.trocId,required this.isEdit,super.key});
+   TrocCreation( {this.trocId,required this.isEdit, required this.isImageCharge,super.key});
 
   @override
   State<TrocCreation> createState() => _TrocCreationState();
@@ -43,6 +43,7 @@ class _TrocCreationState extends State<TrocCreation> {
   var newTroc;
   var imagePath;
   bool isSwitched =false;
+  
   
 
   void _toggleState(bool value) {
@@ -104,14 +105,16 @@ class _TrocCreationState extends State<TrocCreation> {
         valeurNetController.text
     ),
     newTroc = TrocModel(
-      imagePath: imageFileHead,
+      imagePath: widget.isImageCharge 
+      ? imageFileHead 
+      : imageFileHead.path,
       objetARecevoir: objetARecevoirController.text, 
       valeurNet: enterredValeurNet <=0 ? 0 :enterredValeurNet, 
       isUrgent: isSwitched, 
       descriptionTroc: descriptionController.text, 
       userName: "1", 
       categorie: categorieController.text,
-      id: widget.isEdit! == true ? widget.trocId : "0",
+      id: widget.isEdit == true ? widget.trocId : "0",
 
     );
     if(widget.isEdit==true)
@@ -200,11 +203,17 @@ class _TrocCreationState extends State<TrocCreation> {
                     SizedBox(
                       width: double.infinity,
                       height: 250,
-                      child:  imageFileHead is String 
+                      child: widget.isImageCharge
+                      ? 
+                       Image.file( File( imageFileHead) , fit: BoxFit.cover)
+                      :
+                       Image.file( File( imageFileHead.path) , fit: BoxFit.cover)
+
+                      
+                      /* imageFileHead is String 
                       ?
                        Image.asset( imageFileHead,fit: BoxFit.cover)
-                      : 
-                       Image.file( File( imageFileHead.path) , fit: BoxFit.cover),
+                      :  */
 
                     ),
                     Positioned(
@@ -215,6 +224,7 @@ class _TrocCreationState extends State<TrocCreation> {
                           backgroundColor:  imageFileHead == null ? Colors.blue : Colors.grey,
                           child: InkWell(
                              onTap: () {
+                              widget.isImageCharge =false;
                              _showMyBottomSheet(context);
                             }, 
                             child: const Icon(Icons.add_a_photo_outlined)
@@ -339,5 +349,3 @@ class _TrocCreationState extends State<TrocCreation> {
     );
   }
 }
-
-

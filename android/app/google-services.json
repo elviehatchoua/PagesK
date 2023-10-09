@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070095976407",
+    "project_id": "kabak-36bc7",
+    "storage_bucket": "kabak-36bc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070095976407:android:ce5bcce26abf50b569ad92",
+        "android_client_info": {
+          "package_name": "com.finology"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn5z6X5OY_CITq5jsJ6XEqYopV0pKhNa8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

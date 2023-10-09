@@ -11,10 +11,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:finology/Constance/constance.dart';
 import 'package:flutter/material.dart';
 
+import '../../Constance/helpers.dart';
 import '../Home/Accounts/account.dart';
 import '../Home/Dashbord/dashbord_tab.dart';
 import '../Home/Wallet/wallet.dart';
 import '../HomePage/Troc/troc.dart';
+import '../Startup/login_form.dart';
+import 'dialog_notification.dart';
 
 
 bool status = AppTheme.isLightTheme ? false : true;
@@ -34,6 +37,45 @@ class CostomeBottomBar extends StatefulWidget {
 }
 
 class _CostomeBottomBarState extends State<CostomeBottomBar> {
+
+
+  init() async{
+    
+   
+      try{
+        await initData(context);
+      } catch(e) {
+         if (e.toString().contains("Failed host lookup")) {
+          NotificationDialog.showCustomDialog(
+              context: context,
+              title: "Network issues!",
+              content: "",
+              isPop: true,
+              isSuccess: false,
+              isRedirect: true,
+              page: const LoginForm());
+        } else {
+          NotificationDialog.showCustomDialog(
+              context: context,
+              title: "An error occured",
+              content: "",
+              isPop: true,
+              isSuccess: false,
+              isRedirect: true,
+              page: const LoginForm());
+        }
+      }
+    
+    
+  }
+
+   @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

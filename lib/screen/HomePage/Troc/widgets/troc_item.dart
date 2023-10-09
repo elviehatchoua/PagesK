@@ -4,6 +4,8 @@ import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/HomePage/Troc/troc_crud.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_description.dart';
 import 'package:finology/screen/Widgets/user_idea.dart';
+import 'package:finology/services/pret_service.dart';
+import 'package:finology/services/services_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,10 +40,20 @@ class _TrocItemState extends State<TrocItem> {
  // bool isVoirPlus = true;
   @override
   Widget build(BuildContext context) {
+    Future<bool> _deleteItem({required String id}) async{
+      PretService pretService = ServiceFactory.createPretService();
+      bool isDeleted = await pretService.deleteById(id);
 
-    //final myMaxLIne = isVoirPlus ? null : 1;
-     var TextTheme = Theme.of(context).textTheme;
-   //var MediaQueryWidth = MediaQuery.of(context).size.width;
+      if(isDeleted)
+      {
+        await fetchPrets(context);
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
    var MediaQueryHeight = MediaQuery.of(context).size.height;
     return  Container(
               margin: EdgeInsets.only(bottom: MediaQueryHeight / 40),
@@ -76,7 +88,7 @@ class _TrocItemState extends State<TrocItem> {
                           value: "modifier",
                           onTap: () {
                             push(
-                              context, TrocCreation(trocId:widget.idTroc, isEdit: true,)
+                               context, TrocCreation(trocId:widget.idTroc, isEdit: true,isImageCharge: true,)
                             );
                           },
                           child: Text("modifier"),
@@ -90,8 +102,8 @@ class _TrocItemState extends State<TrocItem> {
                           child:  Text("supprimer"),
                         ),
                       ],
-                onSelected: (String newValue) {}
-              )
+                      onSelected: (String newValue) {}
+                   )
                         ],
                       ),
                     ),
@@ -122,11 +134,11 @@ class _TrocItemState extends State<TrocItem> {
                          child: SizedBox(
                             height: 450,
                             width: double.infinity,
-                            child:widget.imageTroc is String 
+                            child:/* widget.imageTroc is String 
                             ?
                             Image.asset( widget.imageTroc,fit: BoxFit.cover)
-                            :
-                            Image.file( File(widget.imageTroc.path) , fit: BoxFit.cover),
+                            : */
+                            Image.file( File(widget.imageTroc) , fit: BoxFit.cover),
         
                           ),
                        ),

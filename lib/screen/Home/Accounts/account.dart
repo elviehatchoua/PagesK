@@ -6,8 +6,10 @@ import 'package:finology/Constance/constance.dart';
 import 'package:finology/core/Models/myfiles.dart';
 import 'package:finology/screen/Widgets/common_button.dart';
 import 'package:finology/screen/Widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'bank_account.dart';
 import 'credit_card.dart';
 
@@ -27,6 +29,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _user = Provider.of<User?>(context);
     var currencyFormat = NumberFormat("###.0#", "en_US");
     var ColorTheme = Theme.of(context);
     var TextTheme = Theme.of(context).textTheme;

@@ -1,8 +1,12 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use, library_private_types_in_public_api
 
+import 'dart:io';
+
+import 'package:finology/Constance/helpers.dart';
 import 'package:finology/providers/pret_provider.dart';
 import 'package:finology/screen/HomePage/Troc/detail_trop.dart';
 import 'package:finology/screen/HomePage/personal_page.dart';
+import 'package:finology/screen/Startup/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'Constance/constance.dart' as constance;
 import 'Constance/constance.dart';
 import 'Constance/theme.dart';
+import 'core/Models/pret_model.dart';
 import 'providers/troc_provider.dart';
 import 'screen/Home/Drawer/drawer.dart';
 import 'screen/Home/Dashbord/dashbord_tab.dart';
@@ -22,13 +27,46 @@ import 'screen/Startup/login.dart';
 import 'screen/Startup/register.dart';
 import 'screen/Splash/spash_screen.dart';
 import 'screen/Startup/verity_your_identity.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'screen/Startup/wrapper.dart';
+import 'services/authentification.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]).then((_) => runApp(MyApp()));
+
+  Platform.isAndroid?
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyBn5z6X5OY_CITq5jsJ6XEqYopV0pKhNa8", 
+      appId:  "1:1070095976407:android:ce5bcce26abf50b569ad92", 
+      messagingSenderId: "1070095976407", 
+      projectId: "kabak-36bc7",)
+  )
+  :await Firebase.initializeApp();
+
+  runApp(
+    
+    MultiProvider(providers: [
+      StreamProvider.value(
+        initialData: null,
+        value: AuthService().user,//cest elle qu'on retrouve et implémente dans authentification
+      ),
+    ],
+    child: MyApp(),
+    
+    )
+  );
+ /*      MultiProvider(providers: [
+      StreamProvider.value(
+        initialData: null, 
+        value: AuthService().user,//cest elle qu'on retrouve et implémente dans authentification
+      )
+    ],
+    child: MyApp(),
+  ) */
+  //);
 }
 
 class MyApp extends StatefulWidget {
@@ -113,6 +151,9 @@ class _MyAppState extends State<MyApp> {
     Routes.TROC : (BuildContext context) => Troc(),
     Routes.personnalpage :  (BuildContext context) => PersonalPage(),
     Routes.detailpret : (BuildContext context) => DetailPret(),
+    Routes.loginForm : (BuildContext context) => LoginForm(),
+    Routes.wrapper : (BuildContext context) => Wrapper(),
+    
   };
 }
 
@@ -130,6 +171,10 @@ class Routes {
   static String TROC = "/HomePage/Troc";
   static String personnalpage= "/personnalpage";
   static String detailpret = "/HomePage/Pret/detail_pret";
+  static String loginForm =  "/Startup/login_form";
+  static String wrapper =  "/Startup/wrapper";
+
+
 
 }
 

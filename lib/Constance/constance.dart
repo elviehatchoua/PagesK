@@ -65,6 +65,7 @@ class ConstanceData {
   static String chart = bseImageUrl + "chart.jpg";
   static String adiddas = bseImageUrl + "adiddas.jpg";
   static String phone = bseImageUrl + "phone.jpg";
+  static String kabak = bseImageUrl + 'Kabak_logo.jpg';
 
   ////////////////////////////////////////////
   static String bseIconUrl = 'assets/icons/';

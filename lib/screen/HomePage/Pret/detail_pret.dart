@@ -44,7 +44,7 @@ class _DetailPretState extends State<DetailPret> with TickerProviderStateMixin  
   @override
   Widget build(BuildContext context) {
  
-    final pretList = Provider.of<PretProvider>(context, listen: true).MyPretList;
+    final pretList = Provider.of<PretProvider>(context, listen: true).getPretList;
    final myPret = ModalRoute.of(context)!.settings.arguments as Map;
     final PretI = Provider.of<PretProvider>(context, listen: true).getPretById(myPret['pretid']);
 
@@ -65,7 +65,7 @@ class _DetailPretState extends State<DetailPret> with TickerProviderStateMixin  
                             items: pretList.map((item) => DetailPretItem(
                                description: item.description,
                                montantDuPret: item.montantDuPret,
-                               dateDeLaDemande: item.dateDeLaDemande,
+                               dateDeLaDemande: item.createdAt,
                                dateDeRembourssement: item.dateDeRembourssement,
                                raison: item.raison,
                                tauxDinteret : item.tauxDinteret,
@@ -79,7 +79,8 @@ class _DetailPretState extends State<DetailPret> with TickerProviderStateMixin  
                               autoPlay: true,
                               autoPlayInterval: Duration(seconds: 5),
                               height: 900,
-                              initialPage: int.parse(PretI.id!)-1,
+                              initialPage: PretI.index!,
+                              //initialPage: int.parse(PretI.id!.replaceAll(RegExp(r'[^0-9]'), '')),
                               scrollDirection: Axis.horizontal,
                               scrollPhysics: const BouncingScrollPhysics(),
                               aspectRatio: 2,

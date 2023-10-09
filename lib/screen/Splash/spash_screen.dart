@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
   _loadNextScreen() async {
     await Future.delayed(Duration(milliseconds: 3000));
     if (!mounted) return;
-    Navigator.pushReplacementNamed(context, Routes.introduction);
+    Navigator.pushReplacementNamed(context,  Routes.wrapper  );
   }
 
   @override

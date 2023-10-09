@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks, non_constant_identifier_names, unused_local_variable, sized_box_for_whitespace, camel_case_types, prefer_adjacent_string_concatenation, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, deprecated_member_use
 
 import 'package:finology/screen/Widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:finology/Constance/constance.dart';
+import 'package:provider/provider.dart';
 import 'invest_dashbord.dart';
 import 'manage_dashbord.dart';
 
@@ -35,6 +37,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final _user = Provider.of<User?>(context);
     var ThemeColor = Theme.of(context);
     var TextTheme = Theme.of(context).textTheme;
     var MediaQueryWidth = MediaQuery.of(context).size.width;
