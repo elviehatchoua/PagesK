@@ -30,10 +30,10 @@ class _HomeState extends State<Troc> with SingleTickerProviderStateMixin {
 
     final _user = Provider.of<User?>(context);
 
-    final trocList = Provider.of<TrocProvider>(context, listen:true).trocList;
+    final trocList = Provider.of<TrocProvider>(context, listen:true).getTrocList;
     final pretList = Provider.of<PretProvider>(context, listen: true).getPretList;
 
-    print("my new list : ${pretList}");
+    print("my new list : ${trocList}");
 
   //var ThemeColor = Theme.of(context);
   var TextTheme = Theme.of(context).textTheme;

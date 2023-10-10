@@ -16,14 +16,15 @@ import '../Home/Accounts/account.dart';
 import '../Home/Dashbord/dashbord_tab.dart';
 import '../Home/Wallet/wallet.dart';
 import '../HomePage/Troc/troc.dart';
+import '../HomePage/personal_page.dart';
 import '../Startup/login_form.dart';
 import 'dialog_notification.dart';
 
 
 bool status = AppTheme.isLightTheme ? false : true;
-int currentIndex = 0;
+int currentIndex = 1;
 List<Widget> currentPage = [
-  Home(),
+  PersonalPage(),
   //AccountScreen(),
   Troc(),
   AccountScreen(),
@@ -139,7 +140,7 @@ class _CostomeBottomBarState extends State<CostomeBottomBar> {
                                   : Theme.of(context).iconTheme.color,
                               size: 23),
                           SizedBox(height: 5),
-                          Text("Pret",
+                          Text("Acc..",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
@@ -175,7 +176,7 @@ class _CostomeBottomBarState extends State<CostomeBottomBar> {
                                   : Theme.of(context).iconTheme.color,
                               size: 24),
                           SizedBox(height: 3),
-                          Text("Troc",
+                          Text("Accueil",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
@@ -211,7 +212,7 @@ class _CostomeBottomBarState extends State<CostomeBottomBar> {
                                   : Theme.of(context).iconTheme.color,
                               size: 24),
                           SizedBox(height: 5),
-                          Text("Wallet",
+                          Text("Tra..",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!

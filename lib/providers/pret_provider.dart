@@ -38,7 +38,7 @@ class PretProvider with ChangeNotifier{
 
   //delete
     void deletePret(String ? id){
-      _MyPretList.removeWhere((troc) => troc.id ==id);
+      _MyPretList.removeWhere((pret) => pret.id ==id);
       for(int i=1; i<= _MyPretList.length; i++ ){
         _MyPretList.map((pret) {
           pret.id == i;
@@ -51,6 +51,17 @@ class PretProvider with ChangeNotifier{
   PretModel getPretById(String idPret)
   {
     return _MyPretList.firstWhere((element) => element.id == idPret);
+  }
+
+    List<PretModel> getListPretById(String ? idPret){
+    List<PretModel> ownList= [];
+    for(int i = 0; i<_MyPretList.length; i++)
+    {
+      if(_MyPretList[i].userName == idPret ){
+        ownList.add(_MyPretList[i]);
+      }
+    }
+    return ownList;
   }
 }
 

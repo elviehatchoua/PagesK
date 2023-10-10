@@ -27,7 +27,8 @@ class TrocModel extends BaseModel{
     required this.isUrgent,
     required this.descriptionTroc, 
     required this.userName,
-    required this.categorie
+    required this.categorie,
+    super.createdAt,
   }
   );
 

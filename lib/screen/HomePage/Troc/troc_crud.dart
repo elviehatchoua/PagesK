@@ -1,16 +1,15 @@
 import 'dart:io';
-
 import 'package:finology/core/Models/troc_model.dart';
 import 'package:finology/providers/troc_provider.dart';
 import 'package:finology/screen/Widgets/user_input.dart';
+import 'package:finology/services/services_factory.dart';
+import 'package:finology/services/troc_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:finology/Constance/constance.dart';
 import 'package:provider/provider.dart';
 import '../../Widgets/bottom_sheet.dart';
-import 'troc_creating_head.dart';
 
 class TrocCreation extends StatefulWidget {
   String ? trocId;
@@ -22,16 +21,6 @@ class TrocCreation extends StatefulWidget {
   @override
   State<TrocCreation> createState() => _TrocCreationState();
 }
-
-/*
-*  var     imagePath;
-  double  valeurNet;
-  String  objetARecevoir;
-  String  descriptionTroc;
-  bool    isUrgent;
-  String categorie; 
-  String  userName;
- */
 
 class _TrocCreationState extends State<TrocCreation> {
   final GlobalKey<FormState> _formKey = GlobalKey();
@@ -65,7 +54,7 @@ class _TrocCreationState extends State<TrocCreation> {
   void initState() {
     if(widget.isEdit==true){
       TrocModel trocDetail = Provider.of<TrocProvider>(context,listen: false)
-          .trocList.firstWhere((troc) => troc.id == widget.trocId );
+          .getTrocList.firstWhere((troc) => troc.id == widget.trocId );
         setState(() {
           valeurNetController = 
             TextEditingController(
@@ -84,7 +73,7 @@ class _TrocCreationState extends State<TrocCreation> {
               text: trocDetail.descriptionTroc
             );
           imageFileHead = trocDetail.imagePath;
-          print("My image :::::${imagePath}");
+          //print("My image :::::${imagePath}");
       
         }
        );
@@ -93,7 +82,15 @@ class _TrocCreationState extends State<TrocCreation> {
     
   }
 
-  void onSubmittedData () { 
+  Future<void> onSubmittedData () async { 
+    final  _user = Provider.of<User?>(context, listen: false);
+
+          print("My image :::::${imageFileHead}");
+    
+       String _fileImg =await ServiceFactory.createTrocService().uploadFile(File(imageFileHead.path));
+      // String _fileImgNopath =await ServiceFactory.createTrocService().uploadFile(File(imageFileHead));
+          print("My image :::::${_fileImg}");
+
 
     if(!_formKey.currentState!.validate()){
       return;
@@ -104,29 +101,46 @@ class _TrocCreationState extends State<TrocCreation> {
     final enterredValeurNet = double.parse(
         valeurNetController.text
     ),
+    //String trocImg = await ServiceFactory.createTrocService().uploadFile(imageFileHead.path);
+
+
     newTroc = TrocModel(
-      imagePath: widget.isImageCharge 
-      ? imageFileHead 
-      : imageFileHead.path,
+      imagePath:
+    /*   
+        widget.isImageCharge 
+      ? _fileImgNopath 
+      :   */ 
+      
+      _fileImg,//imageFileHead.path,
       objetARecevoir: objetARecevoirController.text, 
       valeurNet: enterredValeurNet <=0 ? 0 :enterredValeurNet, 
       isUrgent: isSwitched, 
       descriptionTroc: descriptionController.text, 
-      userName: "1", 
+      userName: _user!.displayName!, 
+      createdAt: DateTime.now(),
       categorie: categorieController.text,
       id: widget.isEdit == true ? widget.trocId : "0",
 
     );
+
+    TrocService trocService = ServiceFactory.createTrocService();
+
     if(widget.isEdit==true)
     {
+      TrocModel editedTroc =
+        await trocService.update(newTroc.id!, newTroc);
+
       Provider.of<TrocProvider>(context,listen:false)
-        .editTroc(newTroc);
+        .editTroc(editedTroc);
       //Navigator.of(context).pop();
     }
     else
     {
+      TrocModel createdTroc =
+        await trocService.create(newTroc);
+
     Provider.of<TrocProvider>(context, listen: false)
-      .addNewTroc(newTroc);
+      .addNewTroc(createdTroc);
      // Navigator.of(context).pop();
 
     }
@@ -203,9 +217,11 @@ class _TrocCreationState extends State<TrocCreation> {
                     SizedBox(
                       width: double.infinity,
                       height: 250,
-                      child: widget.isImageCharge
-                      ? 
-                       Image.file( File( imageFileHead) , fit: BoxFit.cover)
+                      child: 
+                      widget.isImageCharge? 
+                        Image(
+                            image: NetworkImage(imageFileHead)
+                           )   //Image.file( File( imageFileHead.path) , fit: BoxFit.cover)
                       :
                        Image.file( File( imageFileHead.path) , fit: BoxFit.cover)
 

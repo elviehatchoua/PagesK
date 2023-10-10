@@ -1,5 +1,7 @@
 import 'package:finology/Constance/constance.dart';
+import 'package:finology/providers/pret_provider.dart';
 import 'package:finology/providers/troc_provider.dart';
+import 'package:finology/screen/HomePage/Pret/widgets/detail_pret_widget.dart';
 import 'package:finology/screen/HomePage/Transfert/transfert.dart';
 import 'package:finology/screen/HomePage/Troc/widgets/troc_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,8 +37,10 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     final _user = Provider.of<User?>(context);
     var TextTheme = Theme.of(context).textTheme;
-    final myTrocLIst = ModalRoute.of(context)!.settings.arguments as Map;
-    final TrocL = Provider.of<TrocProvider>(context, listen: true).getTrocById(myTrocLIst['name']);
+    //final myTrocLIst = ModalRoute.of(context)!.settings.arguments as Map;
+    final TrocL = Provider.of<TrocProvider>(context, listen: true).getTrocById(_user!.displayName!);
+    final PretL = Provider.of<PretProvider>(context, listen: true).getListPretById(_user.displayName!);
+    //final PretL = Provider.of<PretProvider>(context, listen: true).getListPretById(myTrocLIst['name']);
     print("la liste d'élement de la liste : ${TrocL}");
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +59,7 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
               alignment: Alignment.center,
               children: <Widget>[
                 Container(
-                  color:  Color.fromARGB(255, 51, 5, 236),//Color.fromARGB(255, 48, 11, 197),
+                  color:  Color.fromARGB(255, 51, 5, 236),
                   height: 100,
                 ),
                 Positioned(
@@ -66,14 +70,9 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
                        CircleAvatar(
                           radius: 23,
                           backgroundImage: NetworkImage(_user!.photoURL!),
-                         // backgroundColor:    Colors.blue,
-                        /*       child: InkWell(
-                                onTap: () {},
-                                child: const Icon(Icons.account_circle)
-                              ), */
                         ),
                         const SizedBox(width: 20,),
-                        Text(myTrocLIst['name'], style: TextStyle(color: Colors.white),),
+                        Text(_user.displayName!, style: TextStyle(color: Colors.white),),
                      ],
                    ),
                 )
@@ -85,7 +84,6 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
               color: Colors.white,
               padding: EdgeInsets.all(defaultPadding),
               child: Column(
-        //physics: const BouncingScrollPhysics(),
 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -106,16 +104,8 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
                      padding: EdgeInsets.all(defaultPadding - 5 ),
                     height: 70,
                     width:double.infinity,
-                    //margin: const EdgeInsets.only(bottom: 10),
                     decoration: BoxDecoration(
                       color: Theme.of(context).backgroundColor,),
-                      //borderRadius: BorderRadius.circular(defaultRadius),
-                      /* boxShadow: [
-                       BoxShadow(
-                        color: ThemeColor.disabledColor,
-                        blurRadius: 10,
-                        spreadRadius: 2),
-                         ]), */
                       child: TabBar(
                         enableFeedback: true,
                         controller: tabController,
@@ -152,23 +142,24 @@ class _PersonalPageState extends State<PersonalPage> with SingleTickerProviderSt
 
                         ), 
                         Transfert(),
-                        //PretModel()
-                          //height: 400,
-                          /* ListView.builder(
-                          itemCount: TrocL.length,
-                          itemBuilder: (context, index){
-                            return TrocItem(
-                              idTroc: TrocL[index].id,
-                              commentaire: TrocL[index].descriptionTroc,  
-                              imageTroc: TrocL[index].imagePath, 
-                              userName: TrocL[index].userName, 
-                              valeurNet: TrocL[index].valeurNet, 
-                              objetARecevoir: TrocL[index].objetARecevoir,
-                            );
-                          }
-                        
-                        ), */
-                      ],
+                        ListView(
+                          children: PretL.map( 
+                            (e){
+                              return DetailPretItem(
+                                userName: e.userName,
+                                description: e.description,
+                               montantDuPret: e.montantDuPret,
+                               dateDeLaDemande: e.createdAt,
+                               dateDeRembourssement: e.dateDeRembourssement,
+                               raison: e.raison,
+                               tauxDinteret : e.tauxDinteret,
+                               idPret: e.id
+                                
+                              );
+                            }
+                        ).toList(),
+                        )
+                      ]
                     )
                   )
 

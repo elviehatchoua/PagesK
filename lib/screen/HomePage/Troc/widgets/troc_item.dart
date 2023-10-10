@@ -138,7 +138,12 @@ class _TrocItemState extends State<TrocItem> {
                             ?
                             Image.asset( widget.imageTroc,fit: BoxFit.cover)
                             : */
-                            Image.file( File(widget.imageTroc) , fit: BoxFit.cover),
+                                //Image.file( File(widget.imageTroc) , fit: BoxFit.cover),
+                           // Image.asset( widget.imageTroc , fit: BoxFit.cover),
+
+                           Image(
+                            image: NetworkImage(widget.imageTroc)
+                           ) 
         
                           ),
                        ),

@@ -6,7 +6,7 @@ class TrocProvider with ChangeNotifier{
    List<TrocModel> _trocList = [];
 
   //read
-  List<TrocModel> get trocList{
+  List<TrocModel> get getTrocList{
     return [... _trocList];
   }
 //definition of a list of trocs
@@ -16,14 +16,14 @@ class TrocProvider with ChangeNotifier{
 
 //create
   void addNewTroc(TrocModel txTroc){
-    txTroc.id == "${_trocList.length +1}";
+    //txTroc.id == "${_trocList.length +1}";
 
-    _trocList.insert(0,txTroc);
+    _trocList.add(txTroc);
     notifyListeners();
   }
 //edit
   void editTroc(TrocModel txTroc){
-    var index = trocList.indexWhere((element) => element.id == txTroc.id!);
+    var index = _trocList.indexWhere((element) => element.id == txTroc.id!);
     _trocList[index] = txTroc;
     notifyListeners();
   }

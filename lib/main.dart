@@ -42,7 +42,9 @@ Future<void> main() async {
       apiKey: "AIzaSyBn5z6X5OY_CITq5jsJ6XEqYopV0pKhNa8", 
       appId:  "1:1070095976407:android:ce5bcce26abf50b569ad92", 
       messagingSenderId: "1070095976407", 
-      projectId: "kabak-36bc7",)
+      projectId: "kabak-36bc7",
+      storageBucket: "gs://kabak-36bc7.appspot.com"
+      )
   )
   :await Firebase.initializeApp();
 
